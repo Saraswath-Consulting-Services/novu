@@ -6,8 +6,26 @@ services:
     restart: unless-stopped
     logging:
       driver: 'none'
+      # Actaul content provided by novu
+  # mongodb:
+  #   image: mongo
+  #   container_name: mongodb
+  #   restart: unless-stopped
+  #   logging:
+  #     driver: 'json-file'
+  #     options:
+  #       max-size: '50m'
+  #       max-file: '5'
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #   volumes:
+  #     - mongodb:/data/db
+  #   ports:
+  #     - 27017:27017
+      # updated the content
   mongodb:
-    image: mongo
+    image: 'alpine'  # Use a dummy image like 'alpine' as a placeholder.
     container_name: mongodb
     restart: unless-stopped
     logging:
@@ -15,13 +33,11 @@ services:
       options:
         max-size: '50m'
         max-file: '5'
-    environment:
-      - PUID=1000
-      - PGID=1000
     volumes:
       - mongodb:/data/db
     ports:
-      - 27017:27017
+      # - 27017:27017 
+      - 27018:27017 
   api:
     image: 'ghcr.io/novuhq/novu/api:0.16.0'
     depends_on:
